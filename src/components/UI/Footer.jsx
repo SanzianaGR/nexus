@@ -8,7 +8,7 @@ export function Footer() {
           <div className="text-center md:text-left">
             <p className="text-lg font-semibold mb-2">Made by snz 🦊</p>
             <p className="text-sm text-white/60">
-              Built with React, Gemini AI, and a deep passion to connect the
+              Built with React, Gemini AI, and a deep passion of connecting the
               dots
             </p>
           </div>
