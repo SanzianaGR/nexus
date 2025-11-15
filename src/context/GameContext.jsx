@@ -84,6 +84,16 @@ export function GameProvider({ children }) {
     setCurrentPage('completion');
   }, [timer, score]);
 
+  // Reset puzzle (restart current puzzle)
+  const resetPuzzle = useCallback(() => {
+    setUserAnswers({ nodes: {}, edges: {} });
+    setHintsUsedMap({});
+    setCompleted(false);
+    timer.reset();
+    timer.start();
+    score.reset();
+  }, [timer, score]);
+
   // Reset game
   const resetGame = useCallback(() => {
     setCurrentPuzzle(null);
@@ -128,6 +138,7 @@ export function GameProvider({ children }) {
     startNewGame,
     completeGame,
     resetGame,
+    resetPuzzle,
 
     // Timer and score
     timer,

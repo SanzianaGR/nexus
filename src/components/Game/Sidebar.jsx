@@ -1,12 +1,9 @@
 import {
-  CheckCircle,
-  Circle,
-  Lightbulb,
   Target,
   TrendingUp,
+  Lightbulb,
 } from "lucide-react";
 import { useGame } from "../../context/GameContext";
-import { Card } from "../UI/Card";
 import { validateAnswer } from "../../utils/validation";
 
 export function Sidebar() {
@@ -34,125 +31,69 @@ export function Sidebar() {
   );
 
   return (
-    <aside className="w-80 bg-white border-l-2 border-gray-200 p-6 overflow-y-auto">
+    <aside className="w-72 bg-white border-l border-gray-200 p-6 overflow-y-auto">
       <div className="space-y-6">
-        <Card className="p-4">
+        {/* Progress Card */}
+        <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
           <div className="flex items-center gap-2 mb-3">
-            <Target className="w-5 h-5 text-indigo-600" />
-            <h3 className="font-bold text-gray-900">Progress</h3>
+            <Target className="w-4 h-4 text-slate-600" strokeWidth={2} />
+            <h3 className="font-semibold text-sm text-slate-900">Progress</h3>
           </div>
 
-          <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+          <div className="w-full bg-slate-200 rounded-full h-2 mb-2">
             <div
-              className="bg-gradient-to-r from-indigo-500 to-purple-600 h-3 rounded-full transition-all duration-500"
+              className="bg-emerald-500 h-2 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
 
-          <p className="text-sm text-gray-600 text-center">
+          <p className="text-xs text-slate-600 text-center font-medium">
             {totalCompleted} of {totalHidden} complete
           </p>
-        </Card>
+        </div>
 
-        <Card className="p-4">
+        {/* Stats Card */}
+        <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
           <div className="flex items-center gap-2 mb-3">
-            <TrendingUp className="w-5 h-5 text-indigo-600" />
-            <h3 className="font-bold text-gray-900">Stats</h3>
+            <TrendingUp className="w-4 h-4 text-slate-600" strokeWidth={2} />
+            <h3 className="font-semibold text-sm text-slate-900">Statistics</h3>
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Hints Used:</span>
-              <span className="font-semibold text-gray-900">
+              <span className="text-slate-600">Hints Used</span>
+              <span className="font-semibold text-slate-900">
                 {totalHintsUsed}
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Mistakes:</span>
-              <span className="font-semibold text-gray-900">
+              <span className="text-slate-600">Mistakes</span>
+              <span className="font-semibold text-slate-900">
                 {score.mistakes}
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Accuracy:</span>
-              <span className="font-semibold text-gray-900">
+              <span className="text-slate-600">Accuracy</span>
+              <span className="font-semibold text-slate-900">
                 {score.getAccuracy()}%
               </span>
             </div>
           </div>
-        </Card>
+        </div>
 
-        <Card className="p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <CheckCircle className="w-5 h-5 text-indigo-600" />
-            <h3 className="font-bold text-gray-900">Tasks</h3>
-          </div>
-
-          <div className="space-y-2">
-            {hiddenNodes.map((node) => {
-              const isComplete = validateAnswer(
-                userAnswers.nodes[node.id] || "",
-                node.answer
-              ).isCorrect;
-              return (
-                <div key={node.id} className="flex items-center gap-2">
-                  {isComplete ? (
-                    <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                  ) : (
-                    <Circle className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  )}
-                  <span
-                    className={`text-sm ${
-                      isComplete
-                        ? "text-green-700 line-through"
-                        : "text-gray-700"
-                    }`}
-                  >
-                    Fill node: {node.translation}
-                  </span>
-                </div>
-              );
-            })}
-
-            {hiddenEdges.map((edge) => {
-              const isComplete = validateAnswer(
-                userAnswers.edges[edge.id] || "",
-                edge.answer
-              ).isCorrect;
-              return (
-                <div key={edge.id} className="flex items-center gap-2">
-                  {isComplete ? (
-                    <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                  ) : (
-                    <Circle className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  )}
-                  <span
-                    className={`text-sm ${
-                      isComplete
-                        ? "text-green-700 line-through"
-                        : "text-gray-700"
-                    }`}
-                  >
-                    Label relationship
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </Card>
-
-        <Card className="p-4 bg-indigo-50 border-indigo-200">
+        {/* How to Play Card */}
+        <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
           <div className="flex items-center gap-2 mb-2">
-            <Lightbulb className="w-5 h-5 text-indigo-600" />
-            <h3 className="font-bold text-indigo-900">How to Play</h3>
+            <Lightbulb className="w-4 h-4 text-blue-600" strokeWidth={2} />
+            <h3 className="font-semibold text-sm text-blue-900">How to Play</h3>
           </div>
-          <ul className="text-sm text-indigo-800 space-y-1">
-            <li>• Click on ??? nodes to fill in words</li>
-            <li>• Click on ??? edges to label relationships</li>
-            <li>• Use hints if you get stuck (-10 pts each)</li>
-            <li>• Complete all hidden elements to win!</li>
+          <ul className="text-xs text-blue-800 space-y-1 leading-relaxed">
+            <li>• Click ??? nodes to fill in words</li>
+            <li>• Click ??? edges to label relationships</li>
+            <li>• Use hints if stuck (-10 pts each)</li>
+            <li>• Complete all to win!</li>
           </ul>
-        </Card>
+        </div>
       </div>
     </aside>
   );

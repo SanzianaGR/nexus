@@ -1,42 +1,122 @@
-import { useState } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { storage } from '../utils/storage';
+import { useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { storage } from "../utils/storage";
 
 // Fallback puzzles in case Gemini API fails
 const FALLBACK_PUZZLES = {
   spanish_beginner: {
     nodes: [
-      { id: '1', word: 'gato', translation: 'cat', hidden: false },
-      { id: '2', word: '???', answer: 'animal', translation: 'animal', hidden: true, hints: ['A living creature', 'Cats are this', 'animal'] },
-      { id: '3', word: 'perro', translation: 'dog', hidden: false },
-      { id: '4', word: 'mascota', translation: 'pet', hidden: false },
-      { id: '5', word: '???', answer: 'casa', translation: 'house', hidden: true, hints: ['Where pets live', 'A building where you live', 'casa'] },
+      { id: "1", word: "gato", translation: "cat", hidden: false },
+      {
+        id: "2",
+        word: "???",
+        answer: "animal",
+        translation: "animal",
+        hidden: true,
+        hints: ["A living creature", "Cats are this", "animal"],
+      },
+      { id: "3", word: "perro", translation: "dog", hidden: false },
+      { id: "4", word: "mascota", translation: "pet", hidden: false },
+      {
+        id: "5",
+        word: "???",
+        answer: "casa",
+        translation: "house",
+        hidden: true,
+        hints: ["Where pets live", "A building where you live", "casa"],
+      },
     ],
     edges: [
-      { id: 'e1-2', source: '1', target: '2', relationship: 'es un', hidden: false },
-      { id: 'e3-2', source: '3', target: '2', relationship: 'es un', hidden: false },
-      { id: 'e1-4', source: '1', target: '4', relationship: '???', answer: 'es', hidden: true, hints: ['To be', 'Verb connecting subject and predicate', 'es'] },
-      { id: 'e4-5', source: '4', target: '5', relationship: 'vive en', hidden: false },
+      {
+        id: "e1-2",
+        source: "1",
+        target: "2",
+        relationship: "es un",
+        hidden: false,
+      },
+      {
+        id: "e3-2",
+        source: "3",
+        target: "2",
+        relationship: "es un",
+        hidden: false,
+      },
+      {
+        id: "e1-4",
+        source: "1",
+        target: "4",
+        relationship: "???",
+        answer: "es",
+        hidden: true,
+        hints: ["To be", "Verb connecting subject and predicate", "es"],
+      },
+      {
+        id: "e4-5",
+        source: "4",
+        target: "5",
+        relationship: "vive en",
+        hidden: false,
+      },
     ],
-    theme: 'animals',
-    difficulty: 'beginner',
+    theme: "animals",
+    difficulty: "beginner",
   },
   french_beginner: {
     nodes: [
-      { id: '1', word: 'pomme', translation: 'apple', hidden: false },
-      { id: '2', word: '???', answer: 'fruit', translation: 'fruit', hidden: true, hints: ['Category of food', 'Sweet and healthy', 'fruit'] },
-      { id: '3', word: 'rouge', translation: 'red', hidden: false },
-      { id: '4', word: 'manger', translation: 'to eat', hidden: false },
-      { id: '5', word: '???', answer: 'santé', translation: 'health', hidden: true, hints: ['Being well', 'Good for your...', 'santé'] },
+      { id: "1", word: "pomme", translation: "apple", hidden: false },
+      {
+        id: "2",
+        word: "???",
+        answer: "fruit",
+        translation: "fruit",
+        hidden: true,
+        hints: ["Category of food", "Sweet and healthy", "fruit"],
+      },
+      { id: "3", word: "rouge", translation: "red", hidden: false },
+      { id: "4", word: "manger", translation: "to eat", hidden: false },
+      {
+        id: "5",
+        word: "???",
+        answer: "santé",
+        translation: "health",
+        hidden: true,
+        hints: ["Being well", "Good for your...", "santé"],
+      },
     ],
     edges: [
-      { id: 'e1-2', source: '1', target: '2', relationship: 'est un', hidden: false },
-      { id: 'e1-3', source: '1', target: '3', relationship: '???', answer: 'a', hidden: true, hints: ['Has/is', 'Possession verb', 'a'] },
-      { id: 'e4-1', source: '4', target: '1', relationship: 'action', hidden: false },
-      { id: 'e2-5', source: '2', target: '5', relationship: 'bon pour', hidden: false },
+      {
+        id: "e1-2",
+        source: "1",
+        target: "2",
+        relationship: "est un",
+        hidden: false,
+      },
+      {
+        id: "e1-3",
+        source: "1",
+        target: "3",
+        relationship: "???",
+        answer: "a",
+        hidden: true,
+        hints: ["Has/is", "Possession verb", "a"],
+      },
+      {
+        id: "e4-1",
+        source: "4",
+        target: "1",
+        relationship: "action",
+        hidden: false,
+      },
+      {
+        id: "e2-5",
+        source: "2",
+        target: "5",
+        relationship: "bon pour",
+        hidden: false,
+      },
     ],
-    theme: 'food',
-    difficulty: 'beginner',
+    theme: "food",
+    difficulty: "beginner",
   },
 };
 
@@ -44,7 +124,11 @@ export function useGemini() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const generatePuzzle = async (language, difficulty, theme = 'general vocabulary') => {
+  const generatePuzzle = async (
+    language,
+    difficulty,
+    theme = "general vocabulary"
+  ) => {
     setLoading(true);
     setError(null);
 
@@ -64,7 +148,8 @@ export function useGemini() {
       advanced: { nodes: 10, hiddenNodes: 6, hiddenEdges: 3 },
     };
 
-    const settings = difficultySettings[difficulty] || difficultySettings.beginner;
+    const settings =
+      difficultySettings[difficulty] || difficultySettings.beginner;
 
     const prompt = `You are a language learning puzzle generator. Create a semantic network graph puzzle.
 
@@ -123,12 +208,12 @@ Ensure graph teaches vocabulary through meaningful connections. Make it educatio
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
         if (!apiKey) {
-          console.warn('No Gemini API key found, using fallback puzzle');
-          throw new Error('No API key');
+          console.warn("No Gemini API key found, using fallback puzzle");
+          throw new Error("No API key");
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         const result = await model.generateContent(prompt);
         const response = await result.response;
@@ -136,15 +221,20 @@ Ensure graph teaches vocabulary through meaningful connections. Make it educatio
 
         // Clean the response - remove markdown code blocks if present
         const cleanedText = text
-          .replace(/```json\n?/g, '')
-          .replace(/```\n?/g, '')
+          .replace(/```json\n?/g, "")
+          .replace(/```\n?/g, "")
           .trim();
 
         const puzzle = JSON.parse(cleanedText);
 
         // Validate puzzle structure
-        if (!puzzle.nodes || !puzzle.edges || !Array.isArray(puzzle.nodes) || !Array.isArray(puzzle.edges)) {
-          throw new Error('Invalid puzzle structure');
+        if (
+          !puzzle.nodes ||
+          !puzzle.edges ||
+          !Array.isArray(puzzle.nodes) ||
+          !Array.isArray(puzzle.edges)
+        ) {
+          throw new Error("Invalid puzzle structure");
         }
 
         // Cache the puzzle
@@ -157,18 +247,21 @@ Ensure graph teaches vocabulary through meaningful connections. Make it educatio
 
         // Wait before retry (exponential backoff)
         if (attempt < maxRetries - 1) {
-          await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
+          await new Promise((resolve) =>
+            setTimeout(resolve, 1000 * Math.pow(2, attempt))
+          );
         }
       }
     }
 
     // All retries failed, use fallback
-    console.warn('All Gemini attempts failed, using fallback puzzle');
-    setError('Using pre-made puzzle. AI generation unavailable.');
+    console.warn("All Gemini attempts failed, using fallback puzzle");
+    setError("Using pre-made puzzle. AI generation unavailable.");
 
     // Select fallback puzzle
     const fallbackKey = `${language.toLowerCase()}_${difficulty}`;
-    const fallback = FALLBACK_PUZZLES[fallbackKey] || FALLBACK_PUZZLES.spanish_beginner;
+    const fallback =
+      FALLBACK_PUZZLES[fallbackKey] || FALLBACK_PUZZLES.spanish_beginner;
 
     setLoading(false);
     return fallback;

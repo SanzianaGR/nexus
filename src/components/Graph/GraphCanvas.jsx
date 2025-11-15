@@ -1,17 +1,18 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 import {
   ReactFlow,
   Background,
   Controls,
-  MiniMap,
   useNodesState,
   useEdgesState,
+  MarkerType,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { CustomNode } from './CustomNode';
 import { CustomEdge } from './CustomEdge';
 import { useGame } from '../../context/GameContext';
 import { validateAnswer } from '../../utils/validation';
+import dagre from 'dagre';
 
 const nodeTypes = {
   custom: CustomNode,
@@ -21,44 +22,81 @@ const edgeTypes = {
   custom: CustomEdge,
 };
 
+// Dagre layout for better graph organization
+const getLayoutedElements = (nodes, edges) => {
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+  dagreGraph.setGraph({
+    rankdir: 'TB', // Top to bottom
+    ranksep: 120,
+    nodesep: 80,
+    edgesep: 50,
+  });
+
+  nodes.forEach((node) => {
+    dagreGraph.setNode(node.id, { width: 180, height: 100 });
+  });
+
+  edges.forEach((edge) => {
+    dagreGraph.setEdge(edge.source, edge.target);
+  });
+
+  dagre.layout(dagreGraph);
+
+  const layoutedNodes = nodes.map((node) => {
+    const nodeWithPosition = dagreGraph.node(node.id);
+    return {
+      ...node,
+      position: {
+        x: nodeWithPosition.x - 90,
+        y: nodeWithPosition.y - 50,
+      },
+    };
+  });
+
+  return { nodes: layoutedNodes, edges };
+};
+
 export function GraphCanvas({ onNodeClick, onEdgeClick }) {
   const { currentPuzzle, userAnswers } = useGame();
-  const [focusedElement, setFocusedElement] = useState(null);
 
   // Convert puzzle data to React Flow format
   const initialNodes = useMemo(() => {
     if (!currentPuzzle) return [];
 
-    return currentPuzzle.nodes.map((node, index) => {
+    const nodes = currentPuzzle.nodes.map((node) => {
+      const userAnswer = userAnswers.nodes[node.id] || '';
       const isCorrect = node.hidden
-        ? validateAnswer(userAnswers.nodes[node.id] || '', node.answer).isCorrect
+        ? validateAnswer(userAnswer, node.answer).isCorrect
         : false;
 
       return {
         id: node.id,
         type: 'custom',
-        position: calculateNodePosition(index, currentPuzzle.nodes.length),
+        position: { x: 0, y: 0 }, // Will be set by layout
         data: {
           ...node,
+          userAnswer,
           isCorrect,
-          isFocused: focusedElement === `node-${node.id}`,
           onClick: () => {
             if (node.hidden && !isCorrect) {
-              setFocusedElement(`node-${node.id}`);
               onNodeClick(node);
             }
           },
         },
       };
     });
-  }, [currentPuzzle, userAnswers.nodes, focusedElement, onNodeClick]);
+
+    return nodes;
+  }, [currentPuzzle, userAnswers.nodes, onNodeClick]);
 
   const initialEdges = useMemo(() => {
     if (!currentPuzzle) return [];
 
     return currentPuzzle.edges.map((edge) => {
+      const userAnswer = userAnswers.edges[edge.id] || '';
       const isCorrect = edge.hidden
-        ? validateAnswer(userAnswers.edges[edge.id] || '', edge.answer).isCorrect
+        ? validateAnswer(userAnswer, edge.answer).isCorrect
         : false;
 
       return {
@@ -66,30 +104,44 @@ export function GraphCanvas({ onNodeClick, onEdgeClick }) {
         source: edge.source,
         target: edge.target,
         type: 'custom',
+        animated: !isCorrect && edge.hidden,
+        markerEnd: {
+          type: MarkerType.ArrowClosed,
+          width: 25,
+          height: 25,
+          color: isCorrect ? '#10b981' : userAnswer && userAnswer.trim() ? '#f87171' : '#E84393',
+        },
         data: {
           ...edge,
+          userAnswer,
           isCorrect,
           onClick: () => {
             if (edge.hidden && !isCorrect) {
-              setFocusedElement(`edge-${edge.id}`);
               onEdgeClick(edge);
             }
           },
         },
       };
     });
-  }, [currentPuzzle, userAnswers.edges, focusedElement, onEdgeClick]);
+  }, [currentPuzzle, userAnswers.edges, onEdgeClick]);
 
-  const [nodes] = useNodesState(initialNodes);
-  const [edges] = useEdgesState(initialEdges);
+  // Apply layout
+  const layoutedElements = useMemo(() => {
+    if (!initialNodes.length) return { nodes: [], edges: [] };
+    return getLayoutedElements(initialNodes, initialEdges);
+  }, [initialNodes, initialEdges]);
 
-  const onNodesChange = useCallback(() => {
-    // Prevent default node changes to keep our custom logic
-  }, []);
+  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedElements.nodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedElements.edges);
 
-  const onEdgesChange = useCallback(() => {
-    // Prevent default edge changes
-  }, []);
+  // Update nodes and edges when answers change
+  useEffect(() => {
+    setNodes(layoutedElements.nodes);
+  }, [layoutedElements.nodes, setNodes]);
+
+  useEffect(() => {
+    setEdges(layoutedElements.edges);
+  }, [layoutedElements.edges, setEdges]);
 
   if (!currentPuzzle) {
     return (
@@ -100,7 +152,7 @@ export function GraphCanvas({ onNodeClick, onEdgeClick }) {
   }
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-gray-50 to-indigo-50 rounded-2xl overflow-hidden border-2 border-gray-200">
+    <div className="w-full h-full bg-gradient-to-br from-[#F5F1E8] to-[#FFB5D6]/10 rounded-xl overflow-hidden border-2 border-[#FFB5D6]/30 shadow-xl">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -109,36 +161,18 @@ export function GraphCanvas({ onNodeClick, onEdgeClick }) {
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         fitView
-        minZoom={0.5}
+        fitViewOptions={{ padding: 0.2 }}
+        minZoom={0.3}
         maxZoom={1.5}
-        defaultViewport={{ x: 0, y: 0, zoom: 1 }}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
         proOptions={{ hideAttribution: true }}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        elementsSelectable={false}
       >
-        <Background color="#e5e7eb" gap={16} />
-        <Controls className="bg-white rounded-lg shadow-md" />
-        <MiniMap
-          className="bg-white rounded-lg shadow-md"
-          nodeColor={(node) => {
-            if (node.data.isCorrect) return '#10b981';
-            if (node.data.hidden) return '#9ca3af';
-            return '#6366f1';
-          }}
-        />
+        <Background color="#FFB5D6" gap={20} size={1.5} />
+        <Controls className="!bg-white !border-2 !border-[#FFB5D6]/50 !shadow-lg !rounded-lg" showInteractive={false} />
       </ReactFlow>
     </div>
   );
-}
-
-// Helper function to calculate circular/hierarchical layout
-function calculateNodePosition(index, total) {
-  // Circular layout
-  const radius = 250;
-  const centerX = 400;
-  const centerY = 300;
-
-  const angle = (index / total) * 2 * Math.PI;
-  const x = centerX + radius * Math.cos(angle);
-  const y = centerY + radius * Math.sin(angle);
-
-  return { x, y };
 }

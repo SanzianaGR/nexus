@@ -14,12 +14,12 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { Button } from "../UI/Button";
-import { useGame } from "../../context/GameContext";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Landing() {
-  const { setCurrentPage } = useGame();
+  const navigate = useNavigate();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export function Landing() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
-                  onClick={() => setCurrentPage("setup")}
+                  onClick={() => navigate("/setup")}
                   className="bg-[#E84393] hover:bg-[#d63884] text-white px-8 py-6 text-lg rounded-full font-semibold shadow-2xl hover:shadow-[#E84393]/50 hover:scale-105 transition-all group"
                 >
                   <span className="flex items-center gap-3">
@@ -328,7 +328,7 @@ export function Landing() {
 
             <Button
               size="lg"
-              onClick={() => setCurrentPage("setup")}
+              onClick={() => navigate("/setup")}
               className="bg-[#403447] hover:bg-[#403447]/90 text-white px-12 py-6 text-lg rounded-full font-medium shadow-2xl hover:shadow-[#403447]/50 hover:scale-105 transition-all mb-4"
             >
               <span className="flex items-center gap-3">
@@ -415,20 +415,33 @@ function AnimatedNetwork({ mousePosition }) {
             <stop offset="100%" stopColor="#FFB5D6" stopOpacity="0" />
           </radialGradient>
         </defs>
-        {[...Array(20)].map((_, i) => (
-          <motion.circle
-            key={i}
-            cx={`${(i * 123) % 100}%`}
-            cy={`${(i * 456) % 100}%`}
-            r="2"
-            fill="url(#glow)"
-            animate={{
-              cx: `${(((i * 123) % 100) + mousePosition.x * 0.01) % 100}%`,
-              cy: `${(((i * 456) % 100) + mousePosition.y * 0.01) % 100}%`,
-            }}
-            transition={{ duration: 2 }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          const baseCx = ((i * 123) % 100);
+          const baseCy = ((i * 456) % 100);
+
+          return (
+            <circle
+              key={i}
+              cx={`${baseCx}%`}
+              cy={`${baseCy}%`}
+              r="2"
+              fill="url(#glow)"
+            >
+              <animate
+                attributeName="cx"
+                values={`${baseCx}%;${(baseCx + 5) % 100}%;${baseCx}%`}
+                dur="10s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="cy"
+                values={`${baseCy}%;${(baseCy + 5) % 100}%;${baseCy}%`}
+                dur="12s"
+                repeatCount="indefinite"
+              />
+            </circle>
+          );
+        })}
       </svg>
     </div>
   );
