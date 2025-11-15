@@ -168,7 +168,7 @@ export function GraphCanvas({ onNodeClick, onEdgeClick }) {
         proOptions={{ hideAttribution: true }}
         nodesDraggable={false}
         nodesConnectable={false}
-        elementsSelectable={false}
+        elementsSelectable={true}
       >
         <Background color="#FFB5D6" gap={20} size={1.5} />
         <Controls className="!bg-white !border-2 !border-[#FFB5D6]/50 !shadow-lg !rounded-lg" showInteractive={false} />

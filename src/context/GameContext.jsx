@@ -6,7 +6,7 @@ const GameContext = createContext(null);
 
 export function GameProvider({ children }) {
   // Game settings
-  const [selectedLanguage, setSelectedLanguage] = useState('spanish');
+  const [selectedLanguage, setSelectedLanguage] = useState('romanian');
   const [selectedDifficulty, setSelectedDifficulty] = useState('beginner');
   const [selectedTheme, setSelectedTheme] = useState('');
 

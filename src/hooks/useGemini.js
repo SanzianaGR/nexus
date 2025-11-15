@@ -4,6 +4,63 @@ import { storage } from "../utils/storage";
 
 // Fallback puzzles in case Gemini API fails
 const FALLBACK_PUZZLES = {
+  romanian_beginner: {
+    nodes: [
+      { id: "1", word: "pisica", translation: "cat", hidden: false },
+      {
+        id: "2",
+        word: "???",
+        answer: "mamifer",
+        translation: "mammal",
+        hidden: true,
+        hints: ["Warm-blooded vertebrate", "Has fur", "mamifer"],
+      },
+      { id: "3", word: "câine", translation: "dog", hidden: false },
+      { id: "4", word: "casa", translation: "house", hidden: false },
+      {
+        id: "5",
+        word: "???",
+        answer: "grădină",
+        translation: "garden",
+        hidden: true,
+        hints: ["Outside space with plants", "Where flowers grow", "grădină"],
+      },
+    ],
+    edges: [
+      {
+        id: "e1-2",
+        source: "1",
+        target: "2",
+        relationship: "este un",
+        hidden: false,
+      },
+      {
+        id: "e3-2",
+        source: "3",
+        target: "2",
+        relationship: "este un",
+        hidden: false,
+      },
+      {
+        id: "e1-4",
+        source: "1",
+        target: "4",
+        relationship: "???",
+        answer: "locuiește în",
+        hidden: true,
+        hints: ["Lives in", "Where cat stays", "locuiește în"],
+      },
+      {
+        id: "e4-5",
+        source: "4",
+        target: "5",
+        relationship: "are",
+        hidden: false,
+      },
+    ],
+    theme: "animals",
+    difficulty: "beginner",
+  },
   spanish_beginner: {
     nodes: [
       { id: "1", word: "gato", translation: "cat", hidden: false },
@@ -16,14 +73,14 @@ const FALLBACK_PUZZLES = {
         hints: ["A living creature", "Cats are this", "animal"],
       },
       { id: "3", word: "perro", translation: "dog", hidden: false },
-      { id: "4", word: "mascota", translation: "pet", hidden: false },
+      { id: "4", word: "casa", translation: "house", hidden: false },
       {
         id: "5",
         word: "???",
-        answer: "casa",
-        translation: "house",
+        answer: "jardín",
+        translation: "garden",
         hidden: true,
-        hints: ["Where pets live", "A building where you live", "casa"],
+        hints: ["Outside space", "Has plants", "jardín"],
       },
     ],
     edges: [
@@ -46,15 +103,15 @@ const FALLBACK_PUZZLES = {
         source: "1",
         target: "4",
         relationship: "???",
-        answer: "es",
+        answer: "vive en",
         hidden: true,
-        hints: ["To be", "Verb connecting subject and predicate", "es"],
+        hints: ["Lives in", "Where cat stays", "vive en"],
       },
       {
         id: "e4-5",
         source: "4",
         target: "5",
-        relationship: "vive en",
+        relationship: "tiene",
         hidden: false,
       },
     ],
@@ -63,24 +120,24 @@ const FALLBACK_PUZZLES = {
   },
   french_beginner: {
     nodes: [
-      { id: "1", word: "pomme", translation: "apple", hidden: false },
+      { id: "1", word: "chat", translation: "cat", hidden: false },
       {
         id: "2",
         word: "???",
-        answer: "fruit",
-        translation: "fruit",
+        answer: "mammifère",
+        translation: "mammal",
         hidden: true,
-        hints: ["Category of food", "Sweet and healthy", "fruit"],
+        hints: ["Warm-blooded", "Has fur", "mammifère"],
       },
-      { id: "3", word: "rouge", translation: "red", hidden: false },
-      { id: "4", word: "manger", translation: "to eat", hidden: false },
+      { id: "3", word: "chien", translation: "dog", hidden: false },
+      { id: "4", word: "maison", translation: "house", hidden: false },
       {
         id: "5",
         word: "???",
-        answer: "santé",
-        translation: "health",
+        answer: "jardin",
+        translation: "garden",
         hidden: true,
-        hints: ["Being well", "Good for your...", "santé"],
+        hints: ["Outside space", "Has plants", "jardin"],
       },
     ],
     edges: [
@@ -92,30 +149,30 @@ const FALLBACK_PUZZLES = {
         hidden: false,
       },
       {
-        id: "e1-3",
-        source: "1",
-        target: "3",
-        relationship: "???",
-        answer: "a",
-        hidden: true,
-        hints: ["Has/is", "Possession verb", "a"],
-      },
-      {
-        id: "e4-1",
-        source: "4",
-        target: "1",
-        relationship: "action",
+        id: "e3-2",
+        source: "3",
+        target: "2",
+        relationship: "est un",
         hidden: false,
       },
       {
-        id: "e2-5",
-        source: "2",
+        id: "e1-4",
+        source: "1",
+        target: "4",
+        relationship: "???",
+        answer: "vit dans",
+        hidden: true,
+        hints: ["Lives in", "Where cat stays", "vit dans"],
+      },
+      {
+        id: "e4-5",
+        source: "4",
         target: "5",
-        relationship: "bon pour",
+        relationship: "a un",
         hidden: false,
       },
     ],
-    theme: "food",
+    theme: "animals",
     difficulty: "beginner",
   },
 };
@@ -151,7 +208,7 @@ export function useGemini() {
     const settings =
       difficultySettings[difficulty] || difficultySettings.beginner;
 
-    const prompt = `You are a language learning puzzle generator. Create a semantic network graph puzzle.
+    const prompt = `You are a language learning puzzle generator. Create a semantic network DIRECTED graph puzzle.
 
 Parameters:
 - Target language: ${language}
@@ -159,23 +216,32 @@ Parameters:
 - Theme: ${theme}
 - Number of nodes: ${settings.nodes}
 
-Requirements:
-1. Generate a connected graph (no isolated nodes)
-2. Use practical, common vocabulary appropriate for ${difficulty} learners
-3. Relationships must be clear and educational: 'is a', 'has', 'used for', 'opposite of', 'similar to', 'part of', 'makes', 'lives in', etc.
-4. ${settings.hiddenNodes} nodes should be hidden for user to fill in
-5. ${settings.hiddenEdges} edges should have hidden relationship labels
-6. Each hidden element needs 3 progressive hints
-7. Vocabulary should connect logically (teach through meaningful semantic connections)
-8. Include pronunciation guide for non-Latin scripts (Japanese, Mandarin)
-9. Relationship labels should be in the target language
+CRITICAL REQUIREMENTS:
+1. Generate a connected DIRECTED graph (edges have direction - arrows matter!)
+2. Use PROPER GRAMMAR with articles: "casa" (the house), "câinele" (the dog), NOT "casa" (bare form)
+3. Relationships MUST make grammatical sense with direction:
+   - CORRECT: "pisica" (source) → "locuiește în" → "casa" (target) = "The cat lives in the house"
+   - WRONG: "casa" → "locuiește în" → "pisica" = "The house lives in the cat" ❌
+4. Use practical, common vocabulary appropriate for ${difficulty} learners
+5. Relationships in target language: "este un", "are", "locuiește în", "face parte din", etc.
+6. ${settings.hiddenNodes} nodes should be hidden for user to fill in
+7. ${settings.hiddenEdges} edges should have hidden relationship labels
+8. Each hidden element needs 3 progressive hints (in English)
+9. Vocabulary should connect logically - teach through meaningful semantic connections
+10. Include pronunciation guide for non-Latin scripts (Japanese, Mandarin, Chinese)
+
+GRAMMAR RULES:
+- Romanian: Use definite articles ("pisica", "casa", "grădina") not bare forms
+- Spanish: Use articles where natural ("el gato", "la casa")
+- French: Use articles ("le chat", "la maison")
+- Ensure subject-verb-object order makes sense with arrow direction
 
 Output ONLY valid JSON (no markdown, no extra text):
 {
   "nodes": [
     {
       "id": "string",
-      "word": "string (in target language)",
+      "word": "string (in target language WITH proper articles)",
       "translation": "string (English translation)",
       "pronunciation": "string (optional, for non-Latin scripts)",
       "hidden": boolean,
@@ -186,9 +252,9 @@ Output ONLY valid JSON (no markdown, no extra text):
   "edges": [
     {
       "id": "string",
-      "source": "node_id",
-      "target": "node_id",
-      "relationship": "string",
+      "source": "node_id (subject)",
+      "target": "node_id (object)",
+      "relationship": "string (verb/preposition in target language)",
       "hidden": boolean,
       "answer": "string (if hidden)",
       "hints": ["hint1", "hint2", "hint3"] (if hidden)
@@ -198,7 +264,12 @@ Output ONLY valid JSON (no markdown, no extra text):
   "difficulty": "string"
 }
 
-Ensure graph teaches vocabulary through meaningful connections. Make it educational and fun!`;
+EXAMPLE (Romanian):
+pisica (source) → "este un" → mamifer (target) ✓ "The cat is a mammal"
+pisica (source) → "locuiește în" → casa (target) ✓ "The cat lives in the house"
+casa (source) → "are" → grădina (target) ✓ "The house has a garden"
+
+Make it educational, grammatically correct, and fun!`;
 
     // Try Gemini API with retries
     const maxRetries = 3;

@@ -9,14 +9,15 @@ import {
   Github,
   ExternalLink,
   Check,
-  Zap,
   Star,
   MessageCircle,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "../UI/Button";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "../UI/Footer";
 
 export function Landing() {
   const navigate = useNavigate();
@@ -32,14 +33,9 @@ export function Landing() {
 
   return (
     <div className="min-h-screen bg-[#F5F1E8] text-[#403447] overflow-hidden">
-      {/* Animated Background Network */}
-      <AnimatedNetwork mousePosition={mousePosition} />
-
-      {/* Hero - Split Screen - KEEP EXACTLY AS IS */}
       <section className="min-h-screen flex items-center relative z-10">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Text */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -64,8 +60,9 @@ export function Landing() {
               </h1>
 
               <p className="text-xl text-[#403447]/70 mb-8 leading-relaxed">
-                Forget flashcards. Forget lists. Learn languages the way your
-                mind actually works— through{" "}
+                Forget flashcards. Forget lists. Forget impossible crosswords.
+                <br />
+                Learn languages the way your mind actually works—through{" "}
                 <strong className="text-[#E84393]">connections</strong>.
               </p>
 
@@ -73,63 +70,28 @@ export function Landing() {
                 <Button
                   size="lg"
                   onClick={() => navigate("/setup")}
-                  className="bg-[#E84393] hover:bg-[#d63884] text-white px-8 py-6 text-lg rounded-full font-semibold shadow-2xl hover:shadow-[#E84393]/50 hover:scale-105 transition-all group"
+                  className="bg-[#E84393] hover:bg-[#d63884] text-white px-8 py-6 text-lg rounded-full font-semibold shadow-lg hover:shadow-xl transition-all group"
                 >
                   <span className="flex items-center gap-3">
-                    Start for free
+                    Play
                     <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                   </span>
                 </Button>
 
-                <Button
-                  size="lg"
+                <button
                   onClick={() =>
                     document
                       .getElementById("story")
                       .scrollIntoView({ behavior: "smooth" })
                   }
-                  className="bg-white hover:bg-[#FFB5D6]/20 text-[#403447] px-8 py-6 text-lg rounded-full font-semibold border-2 border-[#FFB5D6] shadow-lg transition-all"
+                  className="flex items-center justify-center gap-2 text-[#403447] hover:text-[#E84393] transition-colors px-8 py-6"
                 >
-                  <span className="flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-[#E84393]" />
-                    See how it works
+                  <ChevronDown className="w-5 h-5 animate-bounce" />
+                  <span className="text-lg font-medium">
+                    Scroll to learn more
                   </span>
-                </Button>
+                </button>
               </div>
-
-              {/* Quick Stats */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="flex items-center gap-6 mt-12"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FFB5D6] to-[#E84393] border-2 border-white"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-[#403447]/60">7 languages</span>
-                </div>
-                <div className="h-6 w-px bg-[#403447]/20" />
-                <div className="flex items-center gap-2">
-                  <Brain className="w-5 h-5 text-[#E84393]" />
-                  <span className="text-sm text-[#403447]/60">
-                    Science-backed
-                  </span>
-                </div>
-                <div className="h-6 w-px bg-[#403447]/20" />
-                <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 text-[#E84393] fill-[#E84393]" />
-                  <span className="text-sm text-[#403447]/60">
-                    Free forever
-                  </span>
-                </div>
-              </motion.div>
             </motion.div>
 
             {/* Right: Interactive Floating Cards */}
@@ -144,8 +106,7 @@ export function Landing() {
           </div>
         </div>
       </section>
-
-      {/* What Is This Section - YOUR AUTHENTIC TEXT */}
+      {/* What Is This Section */}
       <section id="story" className="py-24 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
           <motion.div
@@ -158,6 +119,18 @@ export function Landing() {
               What is this?
             </h2>
 
+            {/* Nexus Definition Box */}
+            <div className="mb-10 p-8 bg-[#F5F1E8] border-l-4 border-[#E84393] rounded-r-xl">
+              <h3 className="text-2xl font-bold text-[#403447] mb-3">nex·us</h3>
+              <p className="text-lg text-[#403447]/80 italic mb-2">
+                /ˈneksəs/ • noun
+              </p>
+              <p className="text-lg text-[#403447]/80 leading-relaxed">
+                A connection or series of connections linking two or more
+                things. A central point where things converge and interact.
+              </p>
+            </div>
+
             <div className="space-y-6 text-lg text-[#403447]/80 leading-relaxed">
               <p>
                 Nexus is a language learning app built on a simple idea:{" "}
@@ -168,40 +141,98 @@ export function Landing() {
               </p>
 
               <p>
-                When you think "cat," your brain doesn't just retrieve a
-                definition. It triggers a cascade—
+                When you think "school", you don't actually think of a
+                definition, right? A building pops up in your mind, or maybe
+                your classmate, or your best friend you found in school, or{" "}
                 <em className="text-[#E84393]">
-                  {" "}
-                  whiskers, meow, pet, mammal, fluffy
+                  your scratched-up desk from middle school
                 </em>
-                . A whole network lights up.
+                , or{" "}
+                <em className="text-[#E84393]">
+                  that feeling of dread when the teacher is about to call on you
+                </em>
+                , or maybe{" "}
+                <em className="text-[#E84393]">your favorite subject</em>.
               </p>
 
               <p>
-                Traditional apps ignore this. They give you flashcards. Lists.
-                Isolated vocabulary floating in a void. But that's not how
-                memory works.
+                An entire network fires up, and it's easy to traverse from one
+                end to the other. That's how memory actually works.
               </p>
 
-              <p className="font-semibold text-[#403447]">
-                So I built an app that teaches through semantic networks
-                instead.
+              <p>
+                Most language apps like Duolingo, Babbel, or Memrise focus on{" "}
+                <strong>repetition, flashcards, or grammar drills</strong>.
+                Crossword apps, on the other hand, focus on{" "}
+                <strong>trivia and word recall</strong>, not learning. Wordle is
+                not for beginners.
+              </p>
+
+              <p>
+                No major product combines AI-generated linguistic puzzles with
+                adaptive vocabulary learning through semantic networks.
               </p>
             </div>
           </motion.div>
         </div>
       </section>
+      {/* Personal Story Section */}
+      <section className="py-24 px-6 bg-[#F5F1E8]">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-[#403447] mb-8">
+              Why I built this
+            </h2>
 
-      {/* Interactive Demo - FULL FEATURED */}
+            <div className="space-y-6 text-lg text-[#403447]/80 leading-relaxed">
+              <p>
+                I came to the Netherlands as a foreign student from Romania. I
+                tried everything to learn Dutch—Duolingo, Babbel, flashcard
+                apps, grammar books, I wanted to do a wordle in Dutch.
+              </p>
+
+              <p>
+                Nothing worked. The traditional methods felt robotic. I was
+                memorizing words but not{" "}
+                <em className="text-[#E84393]">understanding</em> them.
+              </p>
+
+              <p>
+                Then I realized something: the only way I was actually learning
+                was by{" "}
+                <strong className="text-[#E84393]">making connections</strong>.
+              </p>
+
+              <p>
+                When I learned "fiets" (bike), I didn't memorize it in
+                isolation. I connected it to "fietsen" (to bike), "fietsenrek"
+                (bike rack), "fietsbel" (bike bell)—a whole web of related
+                concepts. That's when it stuck.
+              </p>
+
+              <p className="font-semibold text-[#403447]">
+                So I built Nexus for... me, or to teach the way I actually
+                learn. And maybe the way you learn too. Made by a student for
+                students 🤝
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      {/* Interactive Demo */}
       <section
         id="demo"
-        className="py-32 px-6 bg-gradient-to-br from-[#FFB5D6]/10 via-[#F5F1E8] to-[#E84393]/10 relative overflow-hidden"
+        className="py-32 px-6 bg-white relative overflow-hidden"
       >
         <InteractiveGraphDemo />
       </section>
-
-      {/* Science Section - YOUR TEXT */}
-      <section className="py-24 px-6 bg-white">
+      {/* Science Section */}
+      <section className="py-24 px-6 bg-[#F5F1E8]">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -225,7 +256,7 @@ export function Landing() {
                   random lists. Your brain naturally groups things by meaning.
                 </p>
                 <p className="text-sm text-[#403447]/50 italic">
-                  We're just working with how you're wired.
+                  This is how we're wired
                 </p>
               </div>
 
@@ -250,61 +281,41 @@ export function Landing() {
                 <p className="text-lg text-[#403447]/80 leading-relaxed mb-2">
                   Collins & Loftus (1975) proved that when you think of one
                   word, related concepts automatically activate. That's why
-                  "cat" makes you think of "whiskers" without trying.
+                  "school" makes you think of "teacher" without trying.
                 </p>
                 <p className="text-sm text-[#403447]/50 italic">
-                  We're teaching your brain to do this across languages.
+                  Nexus is teaching your brain to do this across languages.
                 </p>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
-
-      {/* Features - YOUR TEXT */}
-      <section className="py-24 px-6 bg-[#F5F1E8]">
-        <div className="max-w-5xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-[#403447] mb-16 text-center"
-          >
-            What you get
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <FeatureCard
+      {/* Features - Simplified */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <SimpleFeatureCard
               icon={Brain}
               title="AI-generated puzzles"
-              description="Every puzzle is unique. Gemini creates semantic networks on the fly, tailored to your level and interests."
               delay={0}
             />
-            <FeatureCard
-              icon={Globe}
-              title="7 languages (for now)"
-              description="Spanish, French, German, Japanese, Chinese, Dutch, Romanian. More coming soon."
-              delay={0.1}
-            />
-            <FeatureCard
+            <SimpleFeatureCard icon={Globe} title="7 languages" delay={0.1} />
+            <SimpleFeatureCard
               icon={Link2}
-              title="Hints when you're stuck"
-              description="Can't figure out a word? Use hints to get progressively clearer clues. No penalty, just learning."
+              title="Hints when stuck"
               delay={0.2}
             />
-            <FeatureCard
+            <SimpleFeatureCard
               icon={Sparkles}
               title="Actually fun"
-              description="It feels like solving a puzzle, not studying. Because it is a puzzle."
               delay={0.3}
             />
           </div>
         </div>
       </section>
-
-      {/* Personal Note - YOUR TEXT */}
-      <section className="py-24 px-6 bg-gradient-to-br from-[#FFB5D6]/30 to-[#E84393]/20">
+      {/* Personal Note - Simplified */}
+      <section className="py-16 px-6 bg-[#F5F1E8]">
         <div className="max-w-2xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -312,94 +323,26 @@ export function Landing() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#403447] mb-6">
-              A personal note
-            </h2>
-
-            <p className="text-lg text-[#403447]/80 leading-relaxed mb-6">
-              I built this for a hackathon in 48 hours. It's scrappy. It's
-              imperfect. But it works, and I think it's genuinely useful.
-            </p>
-
             <p className="text-lg text-[#403447]/80 leading-relaxed mb-8">
-              If you find bugs (you will), or have ideas (please do), I'd love
-              to hear from you. This is just the beginning.
+              Built in 48 hours. Scrappy, imperfect, but genuinely useful.
+              <br />
+              If you find bugs or have ideas, I'd love to hear from you.
+              <br />
+              This is just the beginning.
             </p>
 
-            <Button
-              size="lg"
-              onClick={() => navigate("/setup")}
-              className="bg-[#403447] hover:bg-[#403447]/90 text-white px-12 py-6 text-lg rounded-full font-medium shadow-2xl hover:shadow-[#403447]/50 hover:scale-105 transition-all mb-4"
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="inline-flex items-center gap-2 text-[#403447] hover:text-[#E84393] transition-colors group"
             >
-              <span className="flex items-center gap-3">
-                Start learning
-                <ArrowRight className="w-6 h-6" />
-              </span>
-            </Button>
-
-            <p className="text-sm text-[#403447]/50">
-              No signup. No payment. Just learning.
-            </p>
+              <ChevronDown className="w-5 h-5 rotate-180 group-hover:-translate-y-1 transition-transform" />
+              <span className="text-sm font-medium">Back to top</span>
+            </button>
           </motion.div>
         </div>
       </section>
-
       {/* Footer */}
-      <footer className="py-12 px-6 bg-[#403447] text-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-            <div className="text-center md:text-left">
-              <p className="text-lg font-semibold mb-2">Made by snz🦊</p>
-              <p className="text-sm text-white/60">
-                Built with React, Gemini AI, and a deep passion to connect the
-                dots
-              </p>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <a
-                href="https://github.com/yourusername/nexus"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-              >
-                <Github className="w-5 h-5" />
-                <span className="text-sm">Source code</span>
-              </a>
-
-              <a
-                href="https://docs.nexus.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-              >
-                <Book className="w-5 h-5" />
-                <span className="text-sm">Documentation</span>
-              </a>
-
-              <a
-                href="https://sanzianagrecu.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-              >
-                <ExternalLink className="w-5 h-5" />
-                <span className="text-sm">My website</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="pt-6 border-t border-white/20 text-center">
-            <p className="text-sm text-white/60">
-              Based on research by Bower (1969), Collins & Loftus (1975), and
-              Watts & Strogatz (1998)
-            </p>
-            <p className="text-xs text-white/40 mt-2">
-              © 2024 Nexus • Built for the CS Girlies Hackathon
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
@@ -416,8 +359,8 @@ function AnimatedNetwork({ mousePosition }) {
           </radialGradient>
         </defs>
         {[...Array(20)].map((_, i) => {
-          const baseCx = ((i * 123) % 100);
-          const baseCy = ((i * 456) % 100);
+          const baseCx = (i * 123) % 100;
+          const baseCy = (i * 456) % 100;
 
           return (
             <circle
@@ -450,7 +393,7 @@ function AnimatedNetwork({ mousePosition }) {
 // Floating Word Cards
 function FloatingWordCards() {
   const words = [
-    { word: "pisica", translation: "cat", color: "#FFB5D6" },
+    { word: "pisică", translation: "cat", color: "#FFB5D6" },
     { word: "mamifer", translation: "mammal", color: "#E84393" },
     { word: "animal", translation: "animal", color: "#403447" },
   ];
@@ -524,7 +467,7 @@ function InteractiveGraphDemo() {
 
       <div className="bg-white border-4 border-[#E84393] rounded-3xl p-12 md:p-16 shadow-2xl">
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-12">
-          <InteractiveNode word="pisica" translation="cat" revealed />
+          <InteractiveNode word="pisică" translation="cat" revealed />
           <InteractiveEdge label="este un" revealed />
           <InteractiveNode
             word={revealed.node2 ? "mamifer" : "???"}
@@ -613,7 +556,7 @@ function InteractiveNode({
       )}
 
       {hint && (
-        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-[#403447] text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap">
+        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-[#403447] text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap z-10">
           💡 {hint}
         </div>
       )}
@@ -652,21 +595,20 @@ function InteractiveEdge({ label, revealed, onClick }) {
   );
 }
 
-// Feature Card
-function FeatureCard({ icon: Icon, title, description, delay }) {
+// Simple Feature Card
+function SimpleFeatureCard({ icon: Icon, title, delay }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay }}
-      className="p-8 bg-white border-2 border-[#FFB5D6]/50 rounded-2xl hover:border-[#E84393] hover:shadow-2xl hover:shadow-[#E84393]/10 transition-all group"
+      className="p-6 bg-white border-2 border-[#FFB5D6]/50 rounded-2xl hover:border-[#E84393] hover:shadow-lg transition-all group text-center"
     >
-      <div className="inline-block p-3 bg-[#FFB5D6]/20 rounded-2xl mb-4 group-hover:bg-[#E84393]/20 transition-all">
-        <Icon className="w-10 h-10 text-[#E84393]" strokeWidth={1.5} />
+      <div className="inline-block p-3 bg-[#FFB5D6]/20 rounded-2xl mb-3 group-hover:bg-[#E84393]/20 transition-all">
+        <Icon className="w-8 h-8 text-[#E84393]" strokeWidth={1.5} />
       </div>
-      <h3 className="text-xl font-bold text-[#403447] mb-3">{title}</h3>
-      <p className="text-[#403447]/70 leading-relaxed">{description}</p>
+      <h3 className="text-lg font-bold text-[#403447]">{title}</h3>
     </motion.div>
   );
 }

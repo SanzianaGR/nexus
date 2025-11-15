@@ -28,7 +28,7 @@ Learn languages through semantic network puzzles! Nexus uses cognitive science p
 ### 1. Clone and Install
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/SanzianaGR/nexus
 cd nexus
 npm install
 ```
