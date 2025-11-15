@@ -79,11 +79,13 @@ Nexus is based on **semantic network theory** and **mental clustering** - the id
 ### Puzzle Generation
 
 The app uses Gemini API to generate unique puzzles based on:
+
 - Target language
 - Difficulty level (controls node count and hidden elements)
 - Optional theme (animals, food, travel, etc.)
 
 Each puzzle is a connected graph where:
+
 - **Nodes** = vocabulary words (some hidden)
 - **Edges** = labeled relationships (some hidden)
 
@@ -130,31 +132,5 @@ src/
 │   └── GameContext.jsx # Global game state
 └── App.jsx             # Main app with routing
 ```
-
-## Hackathon Pitch
-
-**Problem**: Traditional language apps (Duolingo, etc.) teach vocabulary in isolation. But neuroscience shows we learn through semantic networks - connections between concepts.
-
-**Solution**: Nexus gamifies semantic network learning with interactive graph puzzles. Learn vocabulary the way your brain actually works.
-
-**Innovation**:
-- First language app using graph-based learning
-- AI-generated puzzles for infinite variety
-- Based on cognitive science (semantic network theory)
-- Beautiful, modern UX that makes learning fun
-
-**Impact**:
-- More effective learning through meaningful connections
-- Supports 7 languages and multiple difficulty levels
-- Accessible to all learners
-- Community-focused (share scores, compete with friends)
-
-## License
-
-MIT License - feel free to use and modify!
-
-## Credits
-
-Built with by [Your Name] for [Hackathon Name]
 
 Powered by Google Gemini AI
