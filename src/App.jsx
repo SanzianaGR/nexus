@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { GameProvider, useGame } from './context/GameContext';
+import { Landing } from './components/Pages/Landing';
+import { Setup } from './components/Pages/Setup';
+import { Puzzle } from './components/Pages/Puzzle';
+import { Completion } from './components/Pages/Completion';
 
-function App() {
-  const [count, setCount] = useState(0)
+function AppContent() {
+  const { currentPage } = useGame();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  // Simple page routing based on game state
+  switch (currentPage) {
+    case 'landing':
+      return <Landing />;
+    case 'setup':
+      return <Setup />;
+    case 'puzzle':
+      return <Puzzle />;
+    case 'completion':
+      return <Completion />;
+    default:
+      return <Landing />;
+  }
 }
 
-export default App
+function App() {
+  return (
+    <GameProvider>
+      <AppContent />
+    </GameProvider>
+  );
+}
+
+export default App;
