@@ -346,7 +346,7 @@ nexus/
 
 ## 7. Common Development Tasks
 
-### 6.1 Adding a New Language
+### 7.1 Adding a New Language
 
 **Steps**:
 
@@ -399,7 +399,7 @@ npm run dev
 # Verify correct grammar and structure
 ```
 
-### 6.2 Adding a New Difficulty Level
+### 7.2 Adding a New Difficulty Level
 
 **Steps**:
 
@@ -434,7 +434,7 @@ const BASE_SCORES = {
 };
 ```
 
-### 6.3 Customizing Validation Threshold
+### 7.3 Customizing Validation Threshold
 
 **Location**: `/src/utils/validation.js`
 
@@ -462,7 +462,7 @@ validateAnswer("pisica", "pisiica");  // Check if accepted
 validateAnswer("casa", "grădină");    // Should be rejected
 ```
 
-### 6.4 Modifying Cache Duration
+### 7.4 Modifying Cache Duration
 
 **Location**: `/src/utils/storage.js`
 
@@ -480,7 +480,7 @@ const CACHE_EXPIRATION = 7 * 24 * 60 * 60 * 1000;
 const CACHE_EXPIRATION = 0;
 ```
 
-### 6.5 Adding New Achievement Badges
+### 7.5 Adding New Achievement Badges
 
 **Location**: `/src/components/Pages/Completion.jsx`
 
@@ -525,7 +525,7 @@ const achievements = [
 
 ## 8. Debugging
 
-### 7.1 React DevTools
+### 8.1 React DevTools
 
 **Installation**:
 - [Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
@@ -542,7 +542,7 @@ const achievements = [
 - Edit state values live
 - Track component re-renders
 
-### 7.2 Vite Debugging
+### 8.2 Vite Debugging
 
 **Enable Source Maps** (already enabled):
 ```javascript
@@ -560,7 +560,7 @@ export default defineConfig({
 3. Find original `.jsx` files
 4. Set breakpoints
 
-### 7.3 Common Issues
+### 8.3 Common Issues
 
 **Issue**: API key not working in production
 
@@ -611,7 +611,7 @@ npx eslint --fix .
 
 ## 9. Testing
 
-### 8.1 Manual Testing Checklist
+### 9.1 Manual Testing Checklist
 
 **Before Commit**:
 - [ ] Test on desktop browser (Chrome/Firefox)
@@ -631,7 +631,7 @@ npx eslint --fix .
 - [ ] Check score calculation accuracy
 - [ ] Test timer start/pause/reset
 
-### 8.2 Automated Testing (Future)
+### 9.2 Automated Testing (Future)
 
 **Recommended Stack**:
 - **Unit Tests**: Vitest (Vite-native test runner)
@@ -667,7 +667,7 @@ describe('validateAnswer', () => {
 
 ## 10. Deployment
 
-### 9.1 Vercel Deployment
+### 10.1 Vercel Deployment
 
 **Prerequisites**:
 - GitHub account
@@ -706,7 +706,7 @@ describe('validateAnswer', () => {
 - Every push to `main` triggers re-deployment
 - Pull requests create preview deployments
 
-### 9.2 Netlify Deployment
+### 10.2 Netlify Deployment
 
 **Steps**:
 
@@ -737,7 +737,7 @@ describe('validateAnswer', () => {
    - Wait for deployment
    - Visit deployed URL
 
-### 9.3 GitHub Pages Deployment
+### 10.3 GitHub Pages Deployment
 
 **Not Recommended** (requires extra configuration for SPA routing)
 
@@ -747,7 +747,7 @@ describe('validateAnswer', () => {
 
 ## 11. Contributing
 
-### 10.1 How to Contribute
+### 11.1 How to Contribute
 
 1. **Fork Repository**
    - Click "Fork" on GitHub
@@ -783,7 +783,7 @@ describe('validateAnswer', () => {
    - Click "New Pull Request"
    - Describe changes, link issues
 
-### 10.2 Pull Request Guidelines
+### 11.2 Pull Request Guidelines
 
 **Title Format**:
 - `Add: new feature`

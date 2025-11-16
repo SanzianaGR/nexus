@@ -24,7 +24,7 @@ _Complete the graph by filling in missing nodes and relationships_
 
 ### Completion & Stats
 
-![Completion Screen](./screenshots/completion.jpg)
+![Completion Screen](./screenshots/completion-screen.jpg)
 _View your score, achievements, and detailed statistics_
 
 </div>
