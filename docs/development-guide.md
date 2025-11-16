@@ -808,7 +808,7 @@ describe('validateAnswer', () => {
 
 ## 12. Resources
 
-### 11.1 Documentation Links
+### 12.1 Documentation Links
 
 - [React Docs](https://react.dev)
 - [Vite Docs](https://vitejs.dev)
@@ -817,7 +817,7 @@ describe('validateAnswer', () => {
 - [React Flow Docs](https://reactflow.dev)
 - [Gemini API Docs](https://ai.google.dev/docs)
 
-### 11.2 Learning Resources
+### 12.2 Learning Resources
 
 **React**:
 - [React Tutorial](https://react.dev/learn)
@@ -830,7 +830,7 @@ describe('validateAnswer', () => {
 - [Tailwind Utility Classes](https://tailwindcss.com/docs/utility-first)
 - [Responsive Design](https://tailwindcss.com/docs/responsive-design)
 
-### 11.3 Community
+### 12.3 Community
 
 - [GitHub Issues](https://github.com/SanzianaGR/nexus/issues)
 - [GitHub Discussions](https://github.com/SanzianaGR/nexus/discussions)

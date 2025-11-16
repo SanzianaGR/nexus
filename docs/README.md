@@ -6,9 +6,10 @@
 
 ### Vision and Motivation
 
-This project was born from personal frustration with conventional language learning applications that teach words in isolation, making them difficult to remember and apply in real contexts. As a Romanian student learning Dutch, the creator experienced firsthand the limitations of rote memorization approaches.
+This project was born from personal frustration with conventional language learning applications that teach words in isolation, making them difficult to remember and apply in real life.
 
 Nexus addresses this by:
+
 - Teaching words through their relationships and contexts
 - Building mental clusters of related vocabulary
 - Encouraging active recall through interactive puzzles
@@ -17,6 +18,7 @@ Nexus addresses this by:
 ### Core Concept
 
 At its heart, Nexus is an **interactive graph puzzle game** where:
+
 - **Nodes** represent vocabulary words in the target language
 - **Edges** represent labeled relationships between words
 - Some nodes and edges are hidden, creating gaps in the semantic network
@@ -27,36 +29,44 @@ This approach aligns with **semantic network theory**, which suggests that knowl
 ## Visual Walkthrough
 
 ### Landing Page
+
 ![Landing Page](.gitbook/assets/landing.jpg)
 
 The landing page introduces users to the concept of semantic network-based learning with an interactive demo graph that explains the core mechanics.
 
 ### Setup & Customization
+
 ![Setup Page](.gitbook/assets/customize.jpg)
 
 Users can customize their learning experience by selecting:
+
 - Target language (7 languages supported)
 - Difficulty level (Beginner, Intermediate, Advanced)
 - Optional theme for vocabulary focus
 
 ### Interactive Puzzle Canvas
+
 ![Puzzle Canvas](.gitbook/assets/canvas-screen.jpg)
 ![Game Canvas](.gitbook/assets/game-canvas.jpg)
 
 The main puzzle interface features an interactive graph where users:
+
 - Click on hidden nodes and edges to fill them in
 - View their progress and stats in real-time
 - Access progressive hints when needed
 
 ### Input Field Interaction
+
 ![Input Field](.gitbook/assets/input-field.jpg)
 
 A clean, intuitive input modal allows users to enter their answers with validation feedback.
 
 ### Completion & Achievement
+
 ![Completion Screen](.gitbook/assets/completion-screen.jpg)
 
 After completing a puzzle, users see:
+
 - Final score and breakdown
 - Time spent and accuracy metrics
 - Unlocked achievements
@@ -82,6 +92,7 @@ The primary innovation of Nexus is the application of **graph-based learning** t
 ### Supported Languages
 
 Nexus currently supports **7 languages**:
+
 - Romanian
 - Dutch
 - Spanish
