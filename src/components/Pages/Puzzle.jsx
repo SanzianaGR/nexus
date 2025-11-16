@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../Game/Header';
 import { Sidebar } from '../Game/Sidebar';
 import { GraphCanvas } from '../Graph/GraphCanvas';
@@ -6,17 +7,19 @@ import { InputModal } from '../Modals/InputModal';
 import { useGame } from '../../context/GameContext';
 
 export function Puzzle() {
-  const { checkCompletion, completeGame, timer } = useGame();
+  const navigate = useNavigate();
+  const { checkCompletion, completeGame, timer, userAnswers, completed } = useGame();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedElement, setSelectedElement] = useState(null);
   const [elementType, setElementType] = useState(null);
 
   // Check for completion whenever answers change
   useEffect(() => {
-    if (checkCompletion()) {
+    if (!completed && checkCompletion()) {
       completeGame();
+      navigate('/completion');
     }
-  }, [checkCompletion, completeGame]);
+  }, [userAnswers, completed, checkCompletion, completeGame, navigate]);
 
   // Start timer when component mounts
   useEffect(() => {

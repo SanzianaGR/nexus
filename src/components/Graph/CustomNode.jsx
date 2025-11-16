@@ -2,7 +2,7 @@ import { Handle, Position } from '@xyflow/react';
 import { Check, AlertCircle, HelpCircle } from 'lucide-react';
 
 export function CustomNode({ data }) {
-  const { word, translation, hidden, isCorrect, userAnswer, onClick } = data;
+  const { word, answer, translation, hidden, isCorrect, userAnswer, onClick } = data;
 
   // Visual states
   const isHidden = hidden && !isCorrect;
@@ -56,7 +56,7 @@ export function CustomNode({ data }) {
           )}
 
           <div className="font-bold text-xl text-[#403447] mb-1">
-            {isHidden && !isCorrect ? (hasAttempt ? userAnswer : '???') : word}
+            {isCorrect ? (answer || word) : isHidden ? (hasAttempt ? userAnswer : '???') : word}
           </div>
 
           {(!isHidden || isCorrect) && (

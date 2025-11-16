@@ -1,12 +1,23 @@
-import { useEffect, useState } from 'react';
-import { Trophy, Clock, Lightbulb, Target, RotateCcw, Settings, Share2, Sparkles } from 'lucide-react';
-import { Button } from '../UI/Button';
-import { Card } from '../UI/Card';
-import { useGame } from '../../context/GameContext';
-import confetti from 'canvas-confetti';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Trophy,
+  Clock,
+  Lightbulb,
+  Target,
+  RotateCcw,
+  Share2,
+  Sparkles,
+} from "lucide-react";
+import { Button } from "../UI/Button";
+import { Card } from "../UI/Card";
+import { useGame } from "../../context/GameContext";
+import confetti from "canvas-confetti";
+import { motion } from "framer-motion";
 
 export function Completion() {
-  const { timer, score, resetGame, setCurrentPage } = useGame();
+  const navigate = useNavigate();
+  const { timer, score, resetGame } = useGame();
   const [hasTriggeredConfetti, setHasTriggeredConfetti] = useState(false);
 
   const finalScore = score.calculateScore();
@@ -18,7 +29,7 @@ export function Completion() {
       const duration = 3000;
       const end = Date.now() + duration;
 
-      const colors = ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b'];
+      const colors = ["#6366f1", "#8b5cf6", "#10b981", "#f59e0b"];
 
       (function frame() {
         confetti({
@@ -47,24 +58,26 @@ export function Completion() {
 
   const handlePlayAgain = () => {
     resetGame();
-    setCurrentPage('setup');
+    navigate("/setup");
   };
 
   const handleShare = () => {
     const text = `I scored ${finalScore} points on Nexus! 🎉\n\nTime: ${timer.formatTime()}\nAccuracy: ${accuracy}%\n\nLearn languages through connections at nexus-app.com`;
 
     if (navigator.share) {
-      navigator.share({
-        title: 'Nexus - Language Learning',
-        text: text,
-      }).catch(() => {
-        // Fallback to clipboard
-        navigator.clipboard.writeText(text);
-        alert('Score copied to clipboard!');
-      });
+      navigator
+        .share({
+          title: "Nexus - Language Learning",
+          text: text,
+        })
+        .catch(() => {
+          // Fallback to clipboard
+          navigator.clipboard.writeText(text);
+          alert("Score copied to clipboard!");
+        });
     } else {
       navigator.clipboard.writeText(text);
-      alert('Score copied to clipboard!');
+      alert("Score copied to clipboard!");
     }
   };
 
@@ -99,9 +112,7 @@ export function Completion() {
           <h1 className="text-5xl font-bold text-gray-900 mb-2">
             Congratulations!
           </h1>
-          <p className="text-xl text-gray-600">
-            You completed the puzzle!
-          </p>
+          <p className="text-xl text-gray-600">You completed the puzzle!</p>
         </motion.div>
 
         {/* Score Card */}
@@ -124,7 +135,9 @@ export function Completion() {
                 <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-2">
                   <Clock className="w-6 h-6 text-indigo-600" />
                 </div>
-                <div className="font-bold text-gray-900">{timer.formatTime()}</div>
+                <div className="font-bold text-gray-900">
+                  {timer.formatTime()}
+                </div>
                 <div className="text-xs text-gray-600">Time</div>
               </div>
 
@@ -188,11 +201,14 @@ export function Completion() {
                 </div>
               )}
               {/* Always show at least one badge */}
-              {accuracy < 100 && score.hintsUsed > 0 && timer.seconds >= 120 && finalScore < 950 && (
-                <div className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">
-                  🎉 Puzzle Completed
-                </div>
-              )}
+              {accuracy < 100 &&
+                score.hintsUsed > 0 &&
+                timer.seconds >= 120 &&
+                finalScore < 950 && (
+                  <div className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">
+                    🎉 Puzzle Completed
+                  </div>
+                )}
             </div>
           </Card>
         </motion.div>
@@ -204,31 +220,9 @@ export function Completion() {
           transition={{ delay: 0.8 }}
           className="flex flex-col sm:flex-row gap-4"
         >
-          <Button
-            size="lg"
-            onClick={handlePlayAgain}
-            className="flex-1"
-          >
+          <Button size="lg" onClick={handlePlayAgain} className="flex-1">
             <RotateCcw className="w-5 h-5 mr-2" />
             Play Again
-          </Button>
-
-          <Button
-            size="lg"
-            variant="secondary"
-            onClick={handleShare}
-            className="flex-1"
-          >
-            <Share2 className="w-5 h-5 mr-2" />
-            Share Score
-          </Button>
-
-          <Button
-            size="lg"
-            variant="ghost"
-            onClick={() => setCurrentPage('setup')}
-          >
-            <Settings className="w-5 h-5" />
           </Button>
         </motion.div>
       </motion.div>

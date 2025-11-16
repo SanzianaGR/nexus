@@ -1,4 +1,4 @@
-import { BaseEdge, EdgeLabelRenderer, getBezierPath, MarkerType } from '@xyflow/react';
+import { BaseEdge, EdgeLabelRenderer, getBezierPath } from '@xyflow/react';
 
 export function CustomEdge({
   id,
@@ -20,7 +20,7 @@ export function CustomEdge({
     targetPosition,
   });
 
-  const { relationship, hidden, isCorrect, userAnswer, onClick } = data;
+  const { relationship, answer, hidden, isCorrect, userAnswer, onClick } = data;
 
   const isHidden = hidden && !isCorrect;
   const hasAttempt = userAnswer && userAnswer.trim() !== '';
@@ -70,7 +70,7 @@ export function CustomEdge({
             `}
             onClick={onClick}
           >
-            {isHidden && !isCorrect ? (hasAttempt ? userAnswer : '???') : relationship}
+            {isCorrect ? (answer || relationship) : isHidden ? (hasAttempt ? userAnswer : '???') : relationship}
           </div>
         </div>
       </EdgeLabelRenderer>

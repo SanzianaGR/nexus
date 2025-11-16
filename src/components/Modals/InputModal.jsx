@@ -29,15 +29,15 @@ export function InputModal({ isOpen, onClose, element, type }) {
     const result = validateAnswer(input, correctAnswer);
 
     if (result.isCorrect) {
-      // Correct answer
-      setFeedback({ type: 'success', message: 'Correct!' });
-
-      // Submit answer
+      // Submit answer FIRST before showing feedback
       if (type === 'node') {
         submitNodeAnswer(element.id, correctAnswer);
       } else {
         submitEdgeAnswer(element.id, correctAnswer);
       }
+
+      // Then show success feedback
+      setFeedback({ type: 'success', message: 'Correct!' });
 
       // Close modal after short delay
       setTimeout(() => {
@@ -70,6 +70,31 @@ export function InputModal({ isOpen, onClose, element, type }) {
         message: `Hint: ${currentHint}`,
       });
     }
+  };
+
+  const handleShowAnswer = () => {
+    const correctAnswer = element.answer;
+
+    // Submit the correct answer
+    if (type === 'node') {
+      submitNodeAnswer(element.id, correctAnswer);
+    } else {
+      submitEdgeAnswer(element.id, correctAnswer);
+    }
+
+    // Show the answer with a message
+    setFeedback({
+      type: 'hint',
+      message: `The answer is: ${correctAnswer}`,
+    });
+
+    // Close modal after delay
+    setTimeout(() => {
+      onClose();
+      setInput('');
+      setFeedback(null);
+      setAttempts(0);
+    }, 2000);
   };
 
   const handleClose = () => {
@@ -171,6 +196,11 @@ export function InputModal({ isOpen, onClose, element, type }) {
                       <Lightbulb className="w-5 h-5" />
                     </Button>
                   )}
+                  {!canShowHint && hintLevel >= 3 && (
+                    <Button type="button" variant="secondary" onClick={handleShowAnswer} className="whitespace-nowrap">
+                      Show Answer
+                    </Button>
+                  )}
                 </div>
               </form>
 
@@ -178,6 +208,13 @@ export function InputModal({ isOpen, onClose, element, type }) {
               {hintLevel > 0 && (
                 <p className="text-sm text-gray-500 text-center">
                   Hints used: {hintLevel}/3 (-{hintLevel * 10} points)
+                </p>
+              )}
+
+              {/* Show answer info */}
+              {hintLevel >= 3 && (
+                <p className="text-sm text-amber-600 text-center font-medium">
+                  All hints used! You can reveal the answer or keep trying.
                 </p>
               )}
             </div>
