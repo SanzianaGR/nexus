@@ -1,0 +1,48 @@
+{
+  "title": "Nexus - Language Learning Platform Documentation",
+  "description": "Comprehensive technical documentation for Nexus, an AI-powered language learning platform using semantic network theory",
+  "author": "Sanziana Grecu",
+  "language": "en",
+  "gitbook": ">=3.2.0",
+  "root": ".",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  "plugins": [
+    "search",
+    "highlight",
+    "sharing",
+    "fontsettings",
+    "page-toc",
+    "github",
+    "copy-code-button",
+    "expandable-chapters",
+    "back-to-top-button"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/SanzianaGR/nexus"
+    },
+    "sharing": {
+      "facebook": false,
+      "twitter": true,
+      "all": ["twitter", "linkedin"]
+    },
+    "fontsettings": {
+      "theme": "white",
+      "family": "sans",
+      "size": 2
+    }
+  },
+  "pdf": {
+    "fontSize": 12,
+    "paperSize": "a4",
+    "margin": {
+      "top": 56,
+      "bottom": 56,
+      "left": 62,
+      "right": 62
+    }
+  }
+}
