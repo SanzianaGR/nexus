@@ -47,7 +47,6 @@ Users can customize their learning experience by selecting:
 ### Interactive Puzzle Canvas
 
 ![Puzzle Canvas](.gitbook/assets/canvas-screen.jpg)
-![Game Canvas](.gitbook/assets/game-canvas.jpg)
 
 The main puzzle interface features an interactive graph where users:
 
