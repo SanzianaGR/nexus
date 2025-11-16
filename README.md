@@ -2,6 +2,8 @@
 
 Learn languages through semantic network puzzles! Nexus uses cognitive science principles to teach vocabulary through meaningful connections, not isolation.
 
+Build for the CS girlies hackathon 14-16 Nov
+
 ## App Preview
 
 <div align="center">
