@@ -41,7 +41,7 @@ _View your score, achievements, and detailed statistics_
 
 - **Brain-Based Learning**: Based on semantic network theory - how your brain actually learns
 - **Interactive Graph Puzzles**: Complete word graphs by filling in missing nodes and relationships
-- **7 Languages**: Spanish, French, German, Japanese, Mandarin Chinese, Dutch, Romanian
+- **5 Languages**
 - **AI-Powered**: Uses Gemini API to generate unique puzzles on demand
 - **3 Difficulty Levels**: Beginner (5 nodes), Intermediate (7 nodes), Advanced (10 nodes)
 - **Progressive Hints**: Get help when stuck with 3 levels of hints per element

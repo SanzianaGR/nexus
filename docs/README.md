@@ -40,7 +40,7 @@ The landing page introduces users to the concept of semantic network-based learn
 
 Users can customize their learning experience by selecting:
 
-- Target language (7 languages supported)
+- Target language (5 languages supported)
 - Difficulty level (Beginner, Intermediate, Advanced)
 - Optional theme for vocabulary focus
 
