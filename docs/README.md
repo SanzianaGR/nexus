@@ -24,6 +24,44 @@ At its heart, Nexus is an **interactive graph puzzle game** where:
 
 This approach aligns with **semantic network theory**, which suggests that knowledge is organized in interconnected networks of concepts, with learning occurring through the formation and strengthening of these connections.
 
+## Visual Walkthrough
+
+### Landing Page
+![Landing Page](.gitbook/assets/landing.jpg)
+
+The landing page introduces users to the concept of semantic network-based learning with an interactive demo graph that explains the core mechanics.
+
+### Setup & Customization
+![Setup Page](.gitbook/assets/customize.jpg)
+
+Users can customize their learning experience by selecting:
+- Target language (7 languages supported)
+- Difficulty level (Beginner, Intermediate, Advanced)
+- Optional theme for vocabulary focus
+
+### Interactive Puzzle Canvas
+![Puzzle Canvas](.gitbook/assets/canvas-screen.jpg)
+![Game Canvas](.gitbook/assets/game-canvas.jpg)
+
+The main puzzle interface features an interactive graph where users:
+- Click on hidden nodes and edges to fill them in
+- View their progress and stats in real-time
+- Access progressive hints when needed
+
+### Input Field Interaction
+![Input Field](.gitbook/assets/input-field.jpg)
+
+A clean, intuitive input modal allows users to enter their answers with validation feedback.
+
+### Completion & Achievement
+![Completion Screen](.gitbook/assets/completion-screen.jpg)
+
+After completing a puzzle, users see:
+- Final score and breakdown
+- Time spent and accuracy metrics
+- Unlocked achievements
+- Option to try another puzzle
+
 ### Project Context
 
 - **Development Timeline**: Built in 48 hours for the CS Girlies Hackathon

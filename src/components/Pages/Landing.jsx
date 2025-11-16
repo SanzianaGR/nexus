@@ -300,7 +300,7 @@ export function Landing() {
               title="AI-generated puzzles"
               delay={0}
             />
-            <SimpleFeatureCard icon={Globe} title="7 languages" delay={0.1} />
+            <SimpleFeatureCard icon={Globe} title="5 languages" delay={0.1} />
             <SimpleFeatureCard
               icon={Link2}
               title="Hints when stuck"

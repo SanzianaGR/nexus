@@ -1,6 +1,41 @@
-# Nexus - Language Learning Through Connections
+# Nexus - Building your language network
 
 Learn languages through semantic network puzzles! Nexus uses cognitive science principles to teach vocabulary through meaningful connections, not isolation.
+
+## App Preview
+
+<div align="center">
+
+### Landing Page
+
+![Landing Page](./screenshots/landing.jpg)
+_Learn about semantic networks and how Nexus works_
+
+### Setup & Customization
+
+![Setup Page](./screenshots/customize.jpg)
+_Choose your language, difficulty, and theme_
+
+### Interactive Puzzle
+
+![Puzzle Game](./screenshots/canvas-screen.jpg)
+_Complete the graph by filling in missing nodes and relationships_
+![Puzzle Game](./screenshots/game-canvas.jpg)
+
+### Completion & Stats
+
+![Completion Screen](./screenshots/completion.jpg)
+_View your score, achievements, and detailed statistics_
+
+</div>
+
+## 🔗 Links
+
+- **[Live Demo](https://nexus-two-ashen.vercel.app)** - Try it now!
+- **[Devpost](https://devpost.com/software/nexus-v8de17)** - Project submission
+- **[Demo Video](https://studio.youtube.com/video/EIF7u5DwxGk/edit)** - Watch the demo
+- **[Pitch](https://drive.google.com/file/d/18ZaTFlLngltc0WT0aHmUqglPsWtW6gKt/view?usp=sharing)** - See the pitch
+- **[Docs](https://nexus-57.gitbook.io/nexus-docs/)** - See GitBook
 
 ## Features
 

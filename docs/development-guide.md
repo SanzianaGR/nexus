@@ -142,9 +142,60 @@ npm run preview
 
 ---
 
-## 4. Development Workflow
+## 4. Application Screens
 
-### 4.1 Recommended Workflow
+### 4.1 Landing Page
+![](.gitbook/assets/landing.jpg)
+
+The landing page features:
+- Hero section with tagline
+- Interactive demo graph
+- Explanation of semantic network theory
+- Call-to-action to start learning
+
+### 4.2 Setup Screen
+![](.gitbook/assets/customize.jpg)
+
+Configuration options:
+- Language selection (7 languages)
+- Difficulty level (Beginner/Intermediate/Advanced)
+- Optional theme selection
+- Beautiful card-based UI
+
+### 4.3 Puzzle Canvas
+![](.gitbook/assets/canvas-screen.jpg)
+![](.gitbook/assets/game-canvas.jpg)
+
+Main game interface showing:
+- Interactive React Flow graph
+- Hidden nodes and edges
+- Progress sidebar with stats
+- Timer and hint system
+- Custom styled nodes and edges
+
+### 4.4 Input Modal
+![](.gitbook/assets/input-field.jpg)
+
+Clean input interface for:
+- Answer submission
+- Real-time validation
+- Hint display
+- Translation support
+
+### 4.5 Completion Screen
+![](.gitbook/assets/completion-screen.jpg)
+
+Results page displaying:
+- Final score breakdown
+- Time and accuracy metrics
+- Achievement badges
+- Next puzzle option
+
+---
+
+## 5. Development Workflow
+
+### 5.1 Recommended Workflow
 
 1. **Pull Latest Changes**
    ```bash
@@ -178,7 +229,7 @@ npm run preview
 
 7. **Create Pull Request** (on GitHub)
 
-### 4.2 Code Style Guidelines
+### 5.2 Code Style Guidelines
 
 **React Components**:
 - Use functional components only (no classes)
@@ -236,9 +287,9 @@ export function MyComponent({ prop1, prop2 }) {
 
 ---
 
-## 5. Project Structure Guide
+## 6. Project Structure Guide
 
-### 5.1 Directory Organization
+### 6.1 Directory Organization
 
 ```
 nexus/
@@ -269,7 +320,7 @@ nexus/
 └── README.md            # Project README
 ```
 
-### 5.2 When to Create New Files
+### 6.2 When to Create New Files
 
 **New Component**:
 - Create in appropriate subfolder under `/src/components/`
@@ -293,7 +344,7 @@ nexus/
 
 ---
 
-## 6. Common Development Tasks
+## 7. Common Development Tasks
 
 ### 6.1 Adding a New Language
 
@@ -472,7 +523,7 @@ const achievements = [
 
 ---
 
-## 7. Debugging
+## 8. Debugging
 
 ### 7.1 React DevTools
 
@@ -558,7 +609,7 @@ npx eslint --fix .
 
 ---
 
-## 8. Testing
+## 9. Testing
 
 ### 8.1 Manual Testing Checklist
 
@@ -614,7 +665,7 @@ describe('validateAnswer', () => {
 
 ---
 
-## 9. Deployment
+## 10. Deployment
 
 ### 9.1 Vercel Deployment
 
@@ -694,7 +745,7 @@ describe('validateAnswer', () => {
 
 ---
 
-## 10. Contributing
+## 11. Contributing
 
 ### 10.1 How to Contribute
 
@@ -755,7 +806,7 @@ describe('validateAnswer', () => {
 
 ---
 
-## 11. Resources
+## 12. Resources
 
 ### 11.1 Documentation Links
 
