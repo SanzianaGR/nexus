@@ -22,7 +22,6 @@ _Choose your language, difficulty, and theme_
 
 ![Puzzle Game](./screenshots/canvas-screen.jpg)
 _Complete the graph by filling in missing nodes and relationships_
-![Puzzle Game](./screenshots/game-canvas.jpg)
 
 ### Completion & Stats
 
