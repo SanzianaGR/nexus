@@ -10,19 +10,19 @@ This project was born from personal frustration with conventional language learn
 
 Nexus addresses this by:
 
-- Teaching words through their relationships and contexts
-- Building mental clusters of related vocabulary
-- Encouraging active recall through interactive puzzles
-- Making language learning engaging through gamification
+* Teaching words through their relationships and contexts
+* Building mental clusters of related vocabulary
+* Encouraging active recall through interactive puzzles
+* Making language learning engaging through gamification
 
 ### Core Concept
 
 At its heart, Nexus is an **interactive graph puzzle game** where:
 
-- **Nodes** represent vocabulary words in the target language
-- **Edges** represent labeled relationships between words
-- Some nodes and edges are hidden, creating gaps in the semantic network
-- Learners fill in the missing elements by understanding context and connections
+* **Nodes** represent vocabulary words in the target language
+* **Edges** represent labeled relationships between words
+* Some nodes and edges are hidden, creating gaps in the semantic network
+* Learners fill in the missing elements by understanding context and connections
 
 This approach aligns with **semantic network theory**, which suggests that knowledge is organized in interconnected networks of concepts, with learning occurring through the formation and strengthening of these connections.
 
@@ -30,53 +30,53 @@ This approach aligns with **semantic network theory**, which suggests that knowl
 
 ### Landing Page
 
-![Landing Page](.gitbook/assets/landing.jpg)
+![Landing Page](../.gitbook/assets/landing.jpg)
 
 The landing page introduces users to the concept of semantic network-based learning with an interactive demo graph that explains the core mechanics.
 
 ### Setup & Customization
 
-![Setup Page](.gitbook/assets/customize.jpg)
+![Setup Page](../.gitbook/assets/customize.jpg)
 
 Users can customize their learning experience by selecting:
 
-- Target language (5 languages supported)
-- Difficulty level (Beginner, Intermediate, Advanced)
-- Optional theme for vocabulary focus
+* Target language (5 languages supported)
+* Difficulty level (Beginner, Intermediate, Advanced)
+* Optional theme for vocabulary focus
 
 ### Interactive Puzzle Canvas
 
-![Puzzle Canvas](.gitbook/assets/canvas-screen.jpg)
+![Puzzle Canvas](../.gitbook/assets/canvas-screen.jpg)
 
 The main puzzle interface features an interactive graph where users:
 
-- Click on hidden nodes and edges to fill them in
-- View their progress and stats in real-time
-- Access progressive hints when needed
+* Click on hidden nodes and edges to fill them in
+* View their progress and stats in real-time
+* Access progressive hints when needed
 
 ### Input Field Interaction
 
-![Input Field](.gitbook/assets/input-field.jpg)
+![Input Field](../.gitbook/assets/input-field.jpg)
 
 A clean, intuitive input modal allows users to enter their answers with validation feedback.
 
 ### Completion & Achievement
 
-![Completion Screen](.gitbook/assets/completion-screen.jpg)
+![Completion Screen](<../.gitbook/assets/completion-screen (1).jpg>)
 
 After completing a puzzle, users see:
 
-- Final score and breakdown
-- Time spent and accuracy metrics
-- Unlocked achievements
-- Option to try another puzzle
+* Final score and breakdown
+* Time spent and accuracy metrics
+* Unlocked achievements
+* Option to try another puzzle
 
 ### Project Context
 
-- **Development Timeline**: Built in 48 hours for the CS Girlies Hackathon
-- **Target Audience**: Language learners of all levels seeking more effective vocabulary acquisition
-- **Educational Foundation**: Based on cognitive science research in semantic networks and mental clustering
-- **Current Status**: Fully functional MVP with potential for expansion
+* **Development Timeline**: Built in 48 hours for the CS Girlies Hackathon
+* **Target Audience**: Language learners of all levels seeking more effective vocabulary acquisition
+* **Educational Foundation**: Based on cognitive science research in semantic networks and mental clustering
+* **Current Status**: Fully functional MVP with potential for expansion
 
 ### Key Innovation
 
@@ -92,24 +92,24 @@ The primary innovation of Nexus is the application of **graph-based learning** t
 
 Nexus currently supports **7 languages**:
 
-- Romanian
-- Dutch
-- Spanish
-- French
-- German
-- Italian
-- Portuguese
+* Romanian
+* Dutch
+* Spanish
+* French
+* German
+* Italian
+* Portuguese
 
 Each language is supported with proper grammar rules, article usage, and linguistic nuances integrated into the AI-powered puzzle generation system.
 
 ### Technology Highlights
 
-- Modern React 19 with Vite for optimal performance
-- AI-powered content generation using Google Gemini 2.0 Flash
-- Interactive graph visualization with React Flow
-- Sophisticated fuzzy matching algorithm for answer validation
-- Progressive hint system with multiple difficulty levels
-- Achievement and scoring system to track progress
+* Modern React 19 with Vite for optimal performance
+* AI-powered content generation using Google Gemini 2.0 Flash
+* Interactive graph visualization with React Flow
+* Sophisticated fuzzy matching algorithm for answer validation
+* Progressive hint system with multiple difficulty levels
+* Achievement and scoring system to track progress
 
 ### Documentation Structure
 
@@ -123,6 +123,6 @@ This comprehensive documentation is organized to serve multiple purposes:
 6. **Challenges and Solutions**: Development hurdles and how they were overcome
 7. **Future Roadmap**: Potential enhancements and expansion opportunities
 
----
+***
 
 **Next Steps**: Explore the detailed sections to understand the complete architecture, implementation, and design decisions behind Nexus.

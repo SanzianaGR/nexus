@@ -6,58 +6,50 @@ Built for the CS girlies hackathon 14-16 Nov 🚀🚀🚀🚀🚀🚀🚀🚀
 
 ## App Preview
 
-<div align="center">
+#### Landing Page
 
-### Landing Page
+![Landing Page](<.gitbook/assets/landing (2).jpg>) _Learn about semantic networks and how Nexus works_
 
-![Landing Page](./screenshots/landing.jpg)
-_Learn about semantic networks and how Nexus works_
+#### Setup & Customization
 
-### Setup & Customization
+![Setup Page](<.gitbook/assets/customize (2).jpg>) _Choose your language, difficulty, and theme_
 
-![Setup Page](./screenshots/customize.jpg)
-_Choose your language, difficulty, and theme_
+#### Interactive Puzzle
 
-### Interactive Puzzle
+![Puzzle Game](<.gitbook/assets/canvas-screen (2).jpg>) _Complete the graph by filling in missing nodes and relationships_
 
-![Puzzle Game](./screenshots/canvas-screen.jpg)
-_Complete the graph by filling in missing nodes and relationships_
+#### Completion & Stats
 
-### Completion & Stats
-
-![Completion Screen](./screenshots/completion-screen.jpg)
-_View your score, achievements, and detailed statistics_
-
-</div>
+![Completion Screen](.gitbook/assets/completion-screen.jpg) _View your score, achievements, and detailed statistics_
 
 ## 🔗 Links
 
-- **[Live Demo](https://nexus-two-ashen.vercel.app)** - Try it now!
-- **[Devpost](https://devpost.com/software/nexus-v8de17)** - Project submission
-- **[Demo Video](https://studio.youtube.com/video/EIF7u5DwxGk/edit)** - Watch the demo
-- **[Pitch](https://drive.google.com/file/d/18ZaTFlLngltc0WT0aHmUqglPsWtW6gKt/view?usp=sharing)** - See the pitch
-- **[Docs](https://nexus-57.gitbook.io/nexus-docs/)** - See GitBook
+* [**Live Demo**](https://nexus-two-ashen.vercel.app) - Try it now!
+* [**Devpost**](https://devpost.com/software/nexus-v8de17) - Project submission
+* [**Demo Video**](https://studio.youtube.com/video/EIF7u5DwxGk/edit) - Watch the demo
+* [**Pitch**](https://drive.google.com/file/d/18ZaTFlLngltc0WT0aHmUqglPsWtW6gKt/view?usp=sharing) - See the pitch
+* [**Docs**](https://nexus-57.gitbook.io/nexus-docs/) - See GitBook
 
 ## Features
 
-- **Brain-Based Learning**: Based on semantic network theory - how your brain actually learns
-- **Interactive Graph Puzzles**: Complete word graphs by filling in missing nodes and relationships
-- **5 Languages**
-- **AI-Powered**: Uses Gemini API to generate unique puzzles on demand
-- **3 Difficulty Levels**: Beginner (5 nodes), Intermediate (7 nodes), Advanced (10 nodes)
-- **Progressive Hints**: Get help when stuck with 3 levels of hints per element
-- **Score & Stats**: Track your time, accuracy, hints used, and earn achievements
-- **Beautiful UI**: Modern, polished interface with smooth animations
+* **Brain-Based Learning**: Based on semantic network theory - how your brain actually learns
+* **Interactive Graph Puzzles**: Complete word graphs by filling in missing nodes and relationships
+* **5 Languages**
+* **AI-Powered**: Uses Gemini API to generate unique puzzles on demand
+* **3 Difficulty Levels**: Beginner (5 nodes), Intermediate (7 nodes), Advanced (10 nodes)
+* **Progressive Hints**: Get help when stuck with 3 levels of hints per element
+* **Score & Stats**: Track your time, accuracy, hints used, and earn achievements
+* **Beautiful UI**: Modern, polished interface with smooth animations
 
 ## Tech Stack
 
-- **React 19** + **Vite** for fast development
-- **@xyflow/react** for interactive graph visualization
-- **Gemini API** for AI-powered puzzle generation
-- **Tailwind CSS 4** for styling
-- **Framer Motion** for animations
-- **Lucide React** for icons
-- **Canvas Confetti** for celebration effects
+* **React 19** + **Vite** for fast development
+* **@xyflow/react** for interactive graph visualization
+* **Gemini API** for AI-powered puzzle generation
+* **Tailwind CSS 4** for styling
+* **Framer Motion** for animations
+* **Lucide React** for icons
+* **Canvas Confetti** for celebration effects
 
 ## Getting Started
 
@@ -116,23 +108,23 @@ Nexus is based on **semantic network theory** and **mental clustering** - the id
 
 The app uses Gemini API to generate unique puzzles based on:
 
-- Target language
-- Difficulty level (controls node count and hidden elements)
-- Optional theme (animals, food, travel, etc.)
+* Target language
+* Difficulty level (controls node count and hidden elements)
+* Optional theme (animals, food, travel, etc.)
 
 Each puzzle is a connected graph where:
 
-- **Nodes** = vocabulary words (some hidden)
-- **Edges** = labeled relationships (some hidden)
+* **Nodes** = vocabulary words (some hidden)
+* **Edges** = labeled relationships (some hidden)
 
 Puzzles are cached locally to avoid regeneration.
 
 ### Scoring System
 
-- Base score: 1000 points
-- Time penalty: -1 point per second
-- Hint penalty: -10 points per hint
-- Accuracy bonus: +50 points for no mistakes
+* Base score: 1000 points
+* Time penalty: -1 point per second
+* Hint penalty: -10 points per hint
+* Accuracy bonus: +50 points for no mistakes
 
 ## Project Structure
 
